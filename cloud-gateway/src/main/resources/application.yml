@@ -1,0 +1,48 @@
+info:
+  version: "v1"
+  name: "zuul"
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+server:
+  port: 9999
+  tomcat:
+    max-threads: 200
+spring:
+  application:
+    name: zuul
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:1111/eureka/
+  instance:
+    prefer-ip-address: true
+zuul:
+  routes:
+    uaa:
+      sensitiveHeaders:
+      serviceId: auth-server
+    provide:
+      sensitiveHeaders:
+      serviceId: provide-server
+  add-proxy-headers: true
+  host:
+    connect-timeout-millis: 15000
+    socket-timeout-millis: 60000
+
+ribbon:
+  ReadTimeout: 10000
+  ConnectTimeout: 10000
+
+security:
+  oauth2:
+    client:
+      access-token-uri: http://localhost:9999/uaa/oauth/token
+      user-authorization-uri: http://localhost:9999/uaa/oauth/authorize
+      client-id: wf
+    resource:
+      user-info-uri: http://localhost:9999/uaa/user
+      prefer-token-info: false

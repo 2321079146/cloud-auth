@@ -1,0 +1,28 @@
+info:
+  version: "v1"
+  name: "provide"
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+server:
+  port: 8081
+  tomcat:
+    max-threads: 200
+spring:
+  application:
+    name: provide-server
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:1111/eureka/
+  instance:
+    prefer-ip-address: true
+security:
+  oauth2:
+    resource:
+      id: service
+      user-info-uri: http://localhost:9999/uaa/user
+      prefer-token-info: false
