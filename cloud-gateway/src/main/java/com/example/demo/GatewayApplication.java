@@ -12,6 +12,7 @@ import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 @EnableOAuth2Sso
 public class GatewayApplication {
 
+	int a = 1;
 	public static void main(String[] args) {
 		SpringApplication.run(GatewayApplication.class, args);
 	}
